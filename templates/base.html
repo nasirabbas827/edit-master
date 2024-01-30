@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Edit Master{% endblock %}</title>
+    {% block css %}
+        <style>
+            body {
+                font-family: 'Arial', sans-serif;
+                margin: 0;
+                padding: 0;
+            }
+
+            nav {
+                background-color: #3498db;
+                color: #fff;
+                padding: 15px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            nav a {
+                color: #fff;
+                text-decoration: none;
+                padding: 10px;
+                margin: 0 10px;
+                border-radius: 5px;
+                transition: background-color 0.3s;
+            }
+
+            nav a:hover {
+                background-color: #2980b9;
+            }
+
+            main {
+                margin-top: 20px;
+                padding: 20px;
+            }
+
+            ul {
+                list-style-type: none;
+                padding: 0;
+                display: flex;
+                justify-content: center;
+            }
+
+            li {
+                margin-right: 10px;
+            }
+            strong{
+                font-size: 25px;
+            }
+            h1,h2,h3{
+                margin: 30px;
+                text-align: center;
+            }
+        </style>
+    {% endblock css %}
+</head>
+<body>
+    <nav>
+        <a href="{% url 'dashboard' %}"><strong><i>Edit Master</i></strong></a>
+        <div>
+            <ul>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                    <li><a href="{% url 'update_profile' %}">Profile</a></li>
+                    <li><a href="{% url 'change_password' %}">Change Password</a></li>
+                    <li><a href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                    <li><a href="{% url 'user_login' %}">Login</a></li>
+                    <li><a href="{% url 'user_register' %}">Register</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+</body>
+</html>
